@@ -1,12 +1,15 @@
 import bot from './assets/bot.svg'
 import user from './assets/user.svg'
+import 'bootstrap/dist/css/bootstrap.css'
+
+// import { Modal,ModalHeader } from 'reactstrap'
+import React, {useState} from 'react'
+import { Modal,ModalHeader, ModalBody,Row } from 'reactstrap';
 
 const form = document.querySelector('form')
 const chatContainer = document.querySelector('#chat_container')
 
 let loadInterval
-
-
 
 function loader(element) {
     element.textContent = ''
@@ -46,21 +49,40 @@ function generateUniqueId() {
     return `id-${timestamp}-${hexadecimalString}`;
 }
 
-function chatStripe(isAi, value, uniqueId) {
+function chatStripe({isAi, value, uniqueId}) {
+     const [modal, setmodal] = useState(false)
     return (
-        `
-        <div class="wrapper ${isAi && 'ai'}">
-            <div class="chat">
-                <div class="profile">
+        
+        <div>
+        <Modal
+            size='lg'
+            isOpen={modal}
+            toggle={() => setmodal(!modal)}
+                >
+
+            <ModalHeader toggle={() => setmodal(!modal)}>
+           popup
+           </ModalHeader>
+           <ModalBody>
+                <div className={`wrapper ${isAi && 'ai'}`}>
+            <div className="chat">
+                <div className="profile">
                     <img 
-                      src=${isAi ? bot : user} 
+                      src="${isAi ? bot : user} "
                       alt="${isAi ? 'bot' : 'user'}" 
                     />
                 </div>
-                <div class="message" id=${uniqueId}>${value}</div>
+                <div className="message" id={uniqueId}>{value}</div>
             </div>
         </div>
-    `
+        </ModalBody>
+        </Modal>
+        <button className='position-absolute top-100' onClick={() => setmodal(true)}>
+               opento
+           </button>
+       </div>
+       
+    
     )
 }
 
