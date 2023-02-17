@@ -1,6 +1,6 @@
 # assignments
 
-Automation testing using Selenium 
+Automation testing using Selenium webdriver(selenium-server-4.7.2.jar)
  
 Navigate to the following website https://www.saucedemo.com/
 
